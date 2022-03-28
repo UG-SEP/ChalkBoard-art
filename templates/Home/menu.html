@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChalkBoard Art | Menu</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    
+<section class="menu" id="menu" style="background: #eee;">
+
+    <h3 class="sub-heading"> our menu </h3>
+    <h1 class="heading">Main Course </h1>
+
+    <div class="box-container">
+        {% for dish in main_course %}
+        <div class="box">
+            <div class="image">
+                <a href="http://localhost:8000/order?id={{dish.id}}"><img src="{{dish.image.url}}" alt=""></a>
+                            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>{{dish.name}}</h3>
+                <p>{{dish.description}}</p>
+                <a href="http://localhost:8000/add-item?id={{dish.id}}" class="btn">add to cart</a>
+                <span class="price">₹{{dish.price}}</span>
+            </div>
+        </div>
+        {% endfor %}
+
+      
+    </div>
+    
+</section>
+<section class="menu" id="menu">
+
+    <h1 class="heading">Sandwich</h1>
+
+    <div class="box-container">
+
+        {% for dish in sandwich %}
+        <div class="box">
+            <div class="image">
+                <a href="http://localhost:8000/order?id={{dish.id}}"><img src="{{dish.image.url}}" alt=""></a>
+                            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>{{dish.name}}</h3>
+                <p>{{dish.description}}</p>
+                <a href="http://localhost:8000/add-item?id={{dish.id}}" class="btn">add to cart</a>
+                <span class="price">₹{{dish.price}}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+</section>
+
+<section class="menu" id="menu" style="background: #eee;">
+
+    <h1 class="heading">Salads</h1>
+
+    <div class="box-container">
+        {% for dish in salads %}
+        <div class="box">
+            <div class="image">
+                <a href="http://localhost:8000/order?id={{dish.id}}"><img src="{{dish.image.url}}" alt=""></a>
+                            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>{{dish.name}}</h3>
+                <p>{{dish.description}}</p>
+                <a href="http://localhost:8000/add-item?id={{dish.id}}" class="btn">add to cart</a>
+                <span class="price">₹{{dish.price}}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    
+</section>
+
+<section class="menu" id="menu" style="background: #eee;">
+
+    <h1 class="heading">Maggi</h1>
+
+    <div class="box-container">
+        {% for dish in maggi %}
+        <div class="box">
+            <div class="image">
+                <a href="http://localhost:8000/order?id={{dish.id}}"><img src="{{dish.image.url}}" alt=""></a>
+                            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>{{dish.name}}</h3>
+                <p>{{dish.description}}</p>
+                <a href="http://localhost:8000/add-item?id={{dish.id}}" class="btn">add to cart</a>
+                <span class="price">₹{{dish.price}}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+</section>
+
+
+</body>
+<script src="{% static 'js/script.js' %}"></script>
+</html>

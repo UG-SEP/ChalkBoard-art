@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+    <title>{% block title %} {% endblock %}</title>
+</head> 
+<body>
+    <header class="nav-header">
+
+        <a href="{% url 'home' %}" class="logo"><i class="fas fa-utensils"></i>Chalkboard Art</a>
+    
+        <nav class="navbar">
+            <a class="active" href="{% url 'home' %}">home</a>
+            <a href="http://localhost:8000/#about">about</a>
+            <a href="{% url 'menu' %}">menu</a>
+            <a href="http://localhost:8000/#review">review</a>
+            <a href="{% url 'my-order' %}">order</a>
+            {% if user.is_staff %}
+            <a href="{% url 'customer-orders' %}">Customer Orders</a>
+            {% endif %}
+        </nav>
+    
+        <div class="icons">
+            <i class="fas fa-bars" id="menu-bars"></i>
+            {% if user.is_authenticated %}
+            {% else %}
+            <a href="{% url 'signup' %}" class="fas fa-solid fa-user-plus"></a>
+            {% endif %}
+            <a href="{% url 'cart' %}" class="fas fa-shopping-cart"></a>
+
+        </div>
+    
+    </header>
+    
+    <!-- header section ends-->
+    
+    <!-- search form  -->
+
+    {% block content %}
+    {% endblock %}
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

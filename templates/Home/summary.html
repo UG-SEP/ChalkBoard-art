@@ -1,0 +1,123 @@
+<html lang="en">
+{% load static %}
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" />
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+<link rel="stylesheet" href="{% static 'css/forgot-password-style.css' %}">
+<link rel="stylesheet" href="{% static 'css/password-helper.css' %}">
+<title>ChalkBoard Art | Products Summary</title>
+<style>
+     .mt-5 {
+        margin-top: 2rem!important;
+    }
+    @media (min-width: 768px){
+.col-md-10 {
+    width: 100%;
+}}
+.signin-page .field input[type="submit"] {
+    background-color: #27ae60;
+}
+</style>
+</head>
+<body class="bg-light">
+    {% if payment %}
+    <section class="signin-page">
+        <div class="sign-content">
+            <header>Pay</header>
+            <form action="{% url 'success' %}" method="POST" class="field">
+                {% csrf_token %}
+                <script
+                    src="https://checkout.razorpay.com/v1/checkout.js"
+                    data-key="rzp_test_LvlW8rpW4ehTCe"
+                    data-amount="{{payment.amount}}"
+                    data-currency="INR"
+                    data-order_id="{{ payment.id }}"
+                    data-buttontext="Pay with Razorpay"
+                    data-name="Food Payment"
+                    data-description="Thanks for choosing our services"
+                    data-image="https://example.com/your_logo.jpg"
+                    data-prefill.name="{{name}}"
+                    data-prefill.email="{{email}}"
+                    data-prefill.phone="{{phone}}"
+                   
+                    data-theme.color="#F37254"
+                ></script>
+                <input type="hidden" custom="Hidden Element" name="hidden">
+                </form>
+         
+            <div class="signup">
+               
+               <a href="{% url 'home' %}" style="text-decoration: none; color: #192a56;">Go Back to Home</a>
+            </div>
+         </div>
+      </section>
+
+    {% else %}
+<form method="post">
+    {% csrf_token %}
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-10 col-11 mx-auto">
+    <div class="mt-3 shadow p-3 bg-white">
+        <h3 class="py-4">Customer Details</h3>
+
+        <div class="pt-4" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-evenly;">
+            <div>Name&nbsp;&nbsp; <input class="mb-4" type="text" placeholder="Rahul" name="name" style="text-align: center;" required></div>
+           <div>Phone &nbsp;&nbsp;<input class="mb-4" type="tel" placeholder="95xx54xx12" name="phone" style="text-align: center;" required></div>
+            <div>Address <input class="mb-4" type="text" placeholder="Ajmer Highway, Jaipur" name="address" style="text-align: center;" required></div>
+        </div>
+        </div>
+
+        </div>
+<div class="row mt-5 gx-3">
+
+<div>
+<div class="right_side p-3 shadow bg-white">
+<h2 class="product_name mb-5">The Total Amount Of</h2>
+<div class="price_indiv d-flex justify-content-between">
+<p>Product amount</p>
+<p>₹<span id="product_total_amt">{{price}}</span></p>
+</div>
+<div class="price_indiv d-flex justify-content-between">
+<p>Shipping Charge</p>
+<p>₹<span id="shipping_charge">0</span></p>
+</div>
+<hr />
+<div class="total-amt d-flex justify-content-between font-weight-bold">
+<p>The total amount of (including VAT)</p>
+<p>₹<span id="total_cart_amt">{{price}}</span></p>
+</div>
+<div>
+    <p><input type="checkbox" name="later" style="margin-right: 10px;">Pay on Delivery</p>
+</div>
+<button type="submit" class="btn btn-primary text-uppercase" style="background-color: #27ae60; border-color: #27ae60;">Place Order</button>
+</div>
+<!-- discount code part -->
+<div class="discount_code mt-3 shadow">
+<div class="card">
+
+</div>
+</div>
+
+
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div><input type="hidden" name="price" value="{{price}}"></div>
+            <div><input type="hidden" name="id" value="{{id}}"></div>
+            <div><input type="hidden" name="iscart" value="{{iscart}}"></div>
+</form>
+{% endif %}
+</body>
+</html>

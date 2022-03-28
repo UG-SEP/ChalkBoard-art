@@ -1,0 +1,281 @@
+{% extends 'Home/nav.html' %}
+{% load static %}
+{% block title %}Chalkboard Art | India's one of the best food service{% endblock %}
+{% block content %}  
+<!-- home section starts  -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<section class="home" id="home">
+
+    <div class="swiper-container home-slider">
+
+        <div class="swiper-wrapper wrapper">
+
+            <div class="swiper-slide slide">
+                <div class="content">
+                    <span>our special dish</span>
+                    <h3>{{special.name}}</h3>
+                    <p>{{special.description}}</p>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'menu' %}" class="btn">Explore</a>
+                    {% else %}
+                    <a href="{% url 'signup' %}" class="btn">Sign Up</a>
+                    {% endif %}
+                </div>
+                <div class="image">
+                    <img src="{{special.image.url}}" alt="">
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+<!-- home section ends -->
+<!-- menu section starts  -->
+
+<section class="menu" id="menu">
+
+    <h3 class="sub-heading"> our menu </h3>
+    <h1 class="heading">Our Top Food </h1>
+
+    <div class="box-container">
+{% for food in popular %}
+        <div class="box">
+            <div class="image">
+                <a href="http://localhost:8000/order?id={{food.id}}"><img src="{{food.image.url}}" alt=""></a>
+                            </div>
+            <div class="content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <h3>{{food.name}}</h3>
+                <p>{{food.description}}</p>
+                <a href="http://localhost:8000/add-item?id={{food.id}}" class="btn">add to cart</a>
+                <span class="price">₹{{food.price}}</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="sub-heading" style="text-align: right;"><a href="{% url 'menu' %}" style="color: black;">View all</a></div>
+</section>
+
+<!-- menu section ends -->
+
+<!-- about section starts  -->
+
+<section class="about" id="about">
+
+    <h3 class="sub-heading"> about us </h3>
+    <h1 class="heading"> why choose us? </h1>
+
+    <div class="row">
+
+        <div class="image">
+            <img src="{% static 'images/about-img.png' %}" alt="">
+        </div>
+
+        <div class="content">
+            <h3>best food in the country</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, sequi corrupti corporis quaerat voluptatem ipsam neque labore modi autem, saepe numquam quod reprehenderit rem? Tempora aut soluta odio corporis nihil!</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, nemo. Sit porro illo eos cumque deleniti iste alias, eum natus.</p>
+            <div class="icons-container">
+                <div class="icons">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>free delivery</span>
+                </div>
+                <div class="icons">
+                    <i class="fas fa-dollar-sign"></i>
+                    <span>easy payments</span>
+                </div>
+                <div class="icons">
+                    <i class="fas fa-headset"></i>
+                    <span>24/7 service</span>
+                </div>
+            </div>
+            <a href="{% url 'menu' %}" class="btn">Menu</a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- about section ends -->
+
+
+<!-- review section starts  -->
+
+<section class="review" id="review">
+
+    <h3 class="sub-heading"> customer's review </h3>
+    <h1 class="heading"> what they say </h1>
+    <div class="carousel" data-flickity='{"autoPlay": true, "imagesLoaded":true }'>
+        <div class="carousel-cell slide">
+            <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="{% static 'images/modi.jpg'  %}" alt="">
+                    <div class="user-info">
+                        <h3>Narendra Modi</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>I love ChalkBoard art dishes because the taste is awesome and their customer service is of next level</p>
+        </div>
+        <div class="carousel-cell slide">
+            <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="{% static 'images/yogi.jpg'  %}" alt="">
+                    <div class="user-info">
+                        <h3>Aditya Nath Yogi</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>I have been using ChalkBoard Art for food service since they started and I can say that what they provide is awesome</p>
+        </div>
+        <div class="carousel-cell slide">
+            <i class="fas fa-quote-right"></i>
+                <div class="user">
+                    <img src="{% static 'images/tech.jpg'  %}" alt="">
+                    <div class="user-info">
+                        <h3>Technical Guruji</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>ChalkBoard Art is one of my personal favourite food service till now. Will recommend you to try their dishes</p>
+        </div>
+      </div>
+    
+</section>
+
+<!-- review section ends -->
+
+<!-- order section starts  -->
+
+<section class="order" id="order">
+
+    <h3 class="sub-heading"> Contact us </h3>
+    <h1 class="heading"> ChalkBoard Art </h1>
+
+    <form method="post">
+
+        <div class="inputBox">
+            <div class="input">
+                <span>your name</span>
+                <input type="text" placeholder="enter your name" name="name">
+            </div>
+            <div class="input">
+                <span>your number</span>
+                <input type="number" placeholder="enter your number" name="number">
+            </div>
+        </div>
+        <div class="inputBox">
+            <div class="input">
+                <span>your order</span>
+                <input type="text" placeholder="enter food name">
+            </div>
+            <div class="input">
+                <span>additional food</span>
+                <input type="test" placeholder="extra with food">
+            </div>
+        </div>
+        <div class="inputBox">
+            <div class="input">
+                <span>how much</span>
+                <input type="number" placeholder="how many orders">
+            </div>
+            <div class="input">
+                <span>date and time</span>
+                <input type="datetime-local">
+            </div>
+        </div>
+        <div class="inputBox">
+            <div class="input">
+                <span>your address</span>
+                <textarea name="" placeholder="enter your address" id="" cols="30" rows="10" name="address"></textarea>
+            </div>
+            <div class="input">
+                <span>your message</span>
+                <textarea name="" placeholder="enter your message" id="" cols="30" rows="10" name="message"></textarea>
+            </div>
+        </div>
+
+        <input type="submit" value="Order Now" class="btn">
+
+    </form>
+
+</section>
+
+<!-- order section ends -->
+
+<!-- footer section starts  -->
+
+<section class="footer">
+
+    <div class="box-container">
+
+       
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="{% url 'home' %}">home</a>
+            <a href="http://localhost:8000/#about">about</a>
+            <a href="{% url 'menu' %}">menu</a>
+            <a href="http://localhost:8000/#review">review</a>
+            <a href="{% url 'my-order' %}">order</a>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#">+91 9001302924</a>
+            <a href="#">Ajmer Highway, Jaipur</a>
+        </div>
+
+        <div class="box">
+            <h3>follow us</h3>
+            <a href="#">facebook</a>
+            <a href="#">twitter</a>
+            <a href="https://www.instagram.com/chalkboard__art/">instagram</a>
+            <a href="#">linkedin</a>
+        </div>
+
+    </div>
+
+    <div class="credit"> copyright @ 2022 by <span>Chalkboard Art</span> </div>
+
+</section>
+
+<!-- footer section ends -->
+
+<!-- loader part  -->
+<div class="loader-container">
+    <img src="{% static 'images/loader.gif' %}" alt="">
+</div>
+
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+<!-- custom js file link  -->
+{% endblock %}

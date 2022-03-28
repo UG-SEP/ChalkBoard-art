@@ -1,0 +1,161 @@
+<html lang="en">
+{% load static %}
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" />
+<link rel="stylesheet" href="{% static 'css/my_orders.css' %}">
+<title>ChalkBoard Art | Customer Orders</title>
+<style>
+    .mt-5{
+        margin-top: 0rem!important;
+    }
+    .justify-content-end {
+     justify-content: flex-start!important; 
+}
+.anchor {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.anchor:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  color: white;
+}
+.nav-link:hover {
+    border-color: #27ae60;
+    background-color: #27ae60;
+    color: white;
+}
+</style>
+</head>
+<body class="bg-light">
+  <div style="display: flex; justify-content: space-between; flex-wrap: wrap;" class="wrapper1">
+    <div>
+      <ul class="nav nav-tabs" role="tablist">
+              
+              </li>
+              <li class="nav-item" role="presentation">
+                <a
+                  id="select-py"
+                  class="nav-link"
+                  href="{% url 'customer-orders' %}"
+                  >All</a
+                >
+              </li>
+              <li class="nav-item" role="presentation">
+                <a
+                  id="select-cpp"
+                  class="nav-link"
+                  href="http://localhost:8000/customer-orders?filter=pending"
+                  >Pending</a
+                >
+              </li>
+              <li class="nav-item" role="presentation">
+                <a
+                  id="select-cpp"
+                  class="nav-link"   
+                  href="http://localhost:8000/customer-orders?filter=shipped"
+                  >Shipped</a
+                >
+              </li>
+              <li class="nav-item" role="presentation">
+                <a
+                  id="select-cpp"
+                  class="nav-link"
+                  href="http://localhost:8000/customer-orders?filter=completed"
+                  >Completed</a
+                >
+              </li>
+            </ul>
+                 </div>
+  
+           
+  </div>
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-10 col-11 mx-auto">
+<div class="row mt-5 gx-3">
+<!-- left side div -->
+<div class="col-md-12 col-lg-8 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow">
+<h2 class="py-4 font-weight-bold" style="margin-left: 20px;">Customer Orders</h2>
+{% for item in cart %}
+{% for d in item.dish.all %}
+<div class="card p-4">
+<div class="row">
+<!-- cart images div -->
+<div class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
+<img src="{{d.image.url}}" class="img-fluid" alt="cart img">
+</div>
+
+
+
+
+<!-- cart product details -->
+<div class="col-md-7 col-11 mx-auto px-4 mt-2">
+<div class="row">
+<!-- product name  -->
+<div class="col-6 card-title" style="width: 100%;">
+<h1 class="mb-4 product_name">{{d.name}}</h1>
+<p class="mb-2">NAME: {{item.name}}</p>
+<p class="mb-2">CATEGORY: {{d.category.name}}</p>
+{% if item.order_received %}
+<p class="mb-2">STATUS: <span style="color: #15b92b">Order Received</span></p>
+{% elif item.shipped %}
+<p class="mb-2">STATUS: <span style="color: rgba(196, 196, 17, 0.952);">Shipped</span></p>
+
+{% else %}
+<p class="mb-2">STATUS: <span style="color: red;">Pending</span></p>
+{% endif %}
+{% if item.pay_on_delivery %}
+<p class="mb-2">PAYMENT TYPE: Offline</p>
+{% else %}
+<p class="mb-2">PAYMENT TYPE: Online </p>
+{% endif %}
+<p class="mb-2">PHONE NO: {{item.phone}} </p>
+<p class="mb-2">ADDRESS: {{item.address}} </p>
+<p class="mb-2">PAYMENT ID: {{item.razorpay_payment_id}} </p>
+{% if item.order_received %}
+{% elif item.shipped %}
+<a href="http://localhost:8000/order-received?id={{item.id}}" class="anchor">Mark as Completed</a>
+{% elif item.paid %}
+<a href="http://localhost:8000/order-shipped?id={{item.id}}" class="anchor">Mark as Shipped</a>
+{% endif %}
+</div>
+<!-- quantity inc dec -->
+
+<!-- //remover move and price -->
+<div class="col-4 d-flex justify-content-end price_money">
+<h3>₹<span id="itemval">{{d.price}}</span></h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr/>
+{% endfor %}
+{% endfor %}
+<!-- 2nd cart product -->
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<!-- Optional JavaScript -->
+<!-- Popper.js first, then Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+
+</body>
+</html>
