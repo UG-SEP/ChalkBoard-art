@@ -1,0 +1,1 @@
+web: gunicorn ChalkBoard_Art.wsgi --log-file
